@@ -1,10 +1,12 @@
 package com.PaulDanielT.cardShield.dao.category;
 
 import com.PaulDanielT.cardShield.model.Category;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository("jdbc")
 public class CategoryDao implements ICategoryDao {
     @Override
     public List<Category> getAllCategories() {

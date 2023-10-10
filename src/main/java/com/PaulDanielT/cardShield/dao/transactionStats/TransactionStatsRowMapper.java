@@ -2,10 +2,12 @@ package com.PaulDanielT.cardShield.dao.transactionStats;
 
 import com.PaulDanielT.cardShield.model.TransactionStats;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Component
 public class TransactionStatsRowMapper implements RowMapper<TransactionStats> {
     @Override
     public TransactionStats mapRow(ResultSet rs, int rowNum) throws SQLException {

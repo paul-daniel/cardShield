@@ -12,5 +12,5 @@ public interface ICardDao {
     void createCard(Card card);
     void deleteCard(Integer cardId);
     void updateCard(Integer cardId, String categoryName);
-    void existCardWithNumber(String cardNumber);
+    boolean existCardWithNumber(String cardNumber);
 }

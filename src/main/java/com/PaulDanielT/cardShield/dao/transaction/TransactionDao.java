@@ -1,10 +1,12 @@
 package com.PaulDanielT.cardShield.dao.transaction;
 
 import com.PaulDanielT.cardShield.model.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 
+@Repository("jdbc")
 public class TransactionDao implements ITransactionDao{
     @Override
     public void save(Transaction transaction) {

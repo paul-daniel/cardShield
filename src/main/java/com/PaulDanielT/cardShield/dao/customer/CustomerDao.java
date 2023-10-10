@@ -1,10 +1,12 @@
 package com.PaulDanielT.cardShield.dao.customer;
 
 import com.PaulDanielT.cardShield.model.Customer;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository("jdbc")
 public class CustomerDao implements ICustomerDao{
     @Override
     public List<Customer> selectAllCustomers() {
