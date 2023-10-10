@@ -7,6 +7,6 @@ spring:
   main:
       web-application-type: servlet
   datasource:
-      url: jdbc:postgresql://localhost:5332/customer
+      url: jdbc:postgresql://localhost:5333/cardShield
       username: paulDaniel
       password: password

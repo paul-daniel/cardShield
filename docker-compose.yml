@@ -7,7 +7,8 @@ services:
     environment:
       POSTGRES_USER: paulDaniel
       POSTGRES_PASSWORD: password
-      PG_DATA: /data/cardShield  # Changed the database name to 'postgres'
+      POSTGRES_DB: cardShield
+      PG_DATA: /data/cardShield
     ports:
       - "5333:5432"
     volumes:
