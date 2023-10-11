@@ -42,19 +42,19 @@ public class TransactionDao implements ITransactionDao{
     @Override
     public List<Transaction> findByCardId(Integer cardId) {
         var sql = "SELECT * FROM transaction WHERE card_id = ?";
-        return jdbcTemplate.query(sql, new Object[]{cardId}, transactionRowMapper);
+        return jdbcTemplate.query(sql, transactionRowMapper, cardId);
     }
 
     @Override
     public List<Transaction> findByVendorId(Integer vendorId) {
         var sql = "SELECT * FROM transaction WHERE vendor_id = ?";
-        return jdbcTemplate.query(sql, new Object[]{vendorId}, transactionRowMapper);
+        return jdbcTemplate.query(sql, transactionRowMapper, vendorId);
     }
 
     @Override
     public List<Transaction> findByDateRange(Date startDate, Date endDate) {
         var sql = "SELECT * FROM transaction WHERE transaction_date BETWEEN ? AND ?";
-        return jdbcTemplate.query(sql, new Object[]{startDate, endDate}, transactionRowMapper);
+        return jdbcTemplate.query(sql, transactionRowMapper, startDate, endDate);
     }
 
     @Override

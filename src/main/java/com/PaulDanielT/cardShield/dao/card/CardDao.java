@@ -1,7 +1,9 @@
 package com.PaulDanielT.cardShield.dao.card;
 
+import com.PaulDanielT.cardShield.dao.category.CategoryRowMapper;
 import com.PaulDanielT.cardShield.exception.ResourceNotFoundException;
 import com.PaulDanielT.cardShield.model.Card;
+import com.PaulDanielT.cardShield.model.Category;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,10 +15,12 @@ public class CardDao implements ICardDao{
 
     private final JdbcTemplate jdbcTemplate;
     private final CardRowMapper cardRowMapper;
+    private final CategoryRowMapper categoryRowMapper;
 
-    public CardDao(JdbcTemplate jdbcTemplate, CardRowMapper cardRowMapper) {
+    public CardDao(JdbcTemplate jdbcTemplate, CardRowMapper cardRowMapper, CategoryRowMapper categoryRowMapper) {
         this.jdbcTemplate = jdbcTemplate;
         this.cardRowMapper = cardRowMapper;
+        this.categoryRowMapper = categoryRowMapper;
     }
 
     @Override
@@ -81,9 +85,11 @@ public class CardDao implements ICardDao{
         // First, retrieve the category_id for the given category_name
         var fetchCategoryIdSql = "SELECT category_id FROM Category WHERE category_name = ?";
 
-        Integer categoryId = jdbcTemplate.queryForObject(fetchCategoryIdSql, new Object[]{categoryName.toLowerCase()}, Integer.class);
+        Optional<Category> category = jdbcTemplate.query(fetchCategoryIdSql, categoryRowMapper, categoryName)
+                .stream()
+                .findFirst();
 
-        if (categoryId != null) {
+        if (category.isPresent()) {
             // Then, update the card with the fetched category_id
             var updateCardSql = """
                              UPDATE card
@@ -91,7 +97,7 @@ public class CardDao implements ICardDao{
                              WHERE card_id = ?;
                              """;
 
-            jdbcTemplate.update(updateCardSql, categoryId, cardId);
+            jdbcTemplate.update(updateCardSql, category.get().getCategoryId(), cardId);
         } else {
             throw new ResourceNotFoundException("No categories found with name : [%s]".formatted(categoryName));
         }

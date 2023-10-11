@@ -39,8 +39,11 @@ public class VendorDao implements IVendorDao {
 
     @Override
     public List<Vendor> findByCategory(String category) {
-        var sql = "SELECT * FROM vendor WHERE vendor_category = ?";
-        return jdbcTemplate.query(sql, new Object[]{category}, vendorRowMapper);
+        var sql = """
+                    SELECT * FROM vendor WHERE vendor_category = ?;
+                  """;
+
+        return jdbcTemplate.query(sql, vendorRowMapper, category);
     }
 
     @Override

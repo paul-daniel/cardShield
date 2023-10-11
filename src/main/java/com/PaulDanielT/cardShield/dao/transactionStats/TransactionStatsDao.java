@@ -1,6 +1,5 @@
 package com.PaulDanielT.cardShield.dao.transactionStats;
 
-import com.PaulDanielT.cardShield.dao.transaction.TransactionRowMapper;
 import com.PaulDanielT.cardShield.model.TransactionStats;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
