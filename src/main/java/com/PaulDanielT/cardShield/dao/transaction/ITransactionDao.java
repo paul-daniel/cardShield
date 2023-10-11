@@ -4,13 +4,14 @@ import com.PaulDanielT.cardShield.model.Transaction;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface ITransactionDao {
     // Create
     void save(Transaction transaction);
 
     // Read
-    Transaction findById(Integer transactionId);
+    Optional<Transaction> findById(Integer transactionId);
     List<Transaction> findAll();
     List<Transaction> findByCardId(Integer cardId);
     List<Transaction> findByVendorId(Integer vendorId);

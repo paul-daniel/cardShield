@@ -16,7 +16,8 @@ public class FundSourceRowMapper implements RowMapper<FundSource> {
                 rs.getString("card_number"),
                 rs.getDate("expiry_date"),
                 rs.getString("card_type"),
-                rs.getString("card_holder_name")
+                rs.getString("card_holder_name"),
+                rs.getString("cvv")
         );
     }
 }

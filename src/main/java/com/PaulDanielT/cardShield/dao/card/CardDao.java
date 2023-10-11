@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("jdbc")
+@Repository
 public class CardDao implements ICardDao{
 
     private final JdbcTemplate jdbcTemplate;

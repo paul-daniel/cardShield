@@ -1,34 +1,30 @@
 package com.PaulDanielT.cardShield.dao.transactionStats;
 
+import com.PaulDanielT.cardShield.dao.transaction.TransactionRowMapper;
 import com.PaulDanielT.cardShield.model.TransactionStats;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("jdbc")
+@Repository
 public class TransactionStatsDao implements ITransactionStatsDao{
-    @Override
-    public void save(TransactionStats stats) {
 
+    private final JdbcTemplate jdbcTemplate;
+    private final TransactionStatsRowMapper transactionStatsRowMapper;
+
+    public TransactionStatsDao(JdbcTemplate jdbcTemplate, TransactionStatsRowMapper transactionStatsRowMapper) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.transactionStatsRowMapper = transactionStatsRowMapper;
     }
 
     @Override
-    public TransactionStats findByCustomerId(Integer customerId) {
-        return null;
-    }
+    public List<TransactionStats> findByCustomerId(Integer customerId) {
+        var sql = """
+                    SELECT * FROM transaction_stats
+                    WHERE customer_id = ?;
+                """;
 
-    @Override
-    public List<TransactionStats> findTopSpendingCustomers(int limit) {
-        return null;
-    }
-
-    @Override
-    public void update(TransactionStats stats) {
-
-    }
-
-    @Override
-    public void deleteByCustomerId(Integer customerId) {
-
+        return jdbcTemplate.query(sql, transactionStatsRowMapper, customerId);
     }
 }

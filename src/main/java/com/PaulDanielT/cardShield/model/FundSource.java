@@ -15,4 +15,5 @@ public class FundSource {
     private Date expiryDate;
     private String cardType;
     private String cardHolderName;
+    private String cvv;
 }
